@@ -1,0 +1,90 @@
+{
+  "name": "@silviosln/tenant-guard",
+  "version": "0.1.0-pre.1",
+  "description": "Lightweight, framework-agnostic multi-tenancy library for Node.js. Manages tenant context, intercepts SQL queries to inject security scopes, and automates database connection switching.",
+  "keywords": [
+    "multi-tenancy",
+    "tenant",
+    "rls",
+    "row-level-security",
+    "sql",
+    "postgres",
+    "mysql",
+    "security"
+  ],
+  "author": "silviosln",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./pg": {
+      "import": {
+        "types": "./dist/adapters/pg.d.ts",
+        "default": "./dist/adapters/pg.js"
+      },
+      "require": {
+        "types": "./dist/adapters/pg.d.cts",
+        "default": "./dist/adapters/pg.cjs"
+      }
+    },
+    "./mysql2": {
+      "import": {
+        "types": "./dist/adapters/mysql2.d.ts",
+        "default": "./dist/adapters/mysql2.js"
+      },
+      "require": {
+        "types": "./dist/adapters/mysql2.d.cts",
+        "default": "./dist/adapters/mysql2.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run lint && npm run test && npm run build"
+  },
+  "peerDependencies": {
+    "mysql2": ">=3.0.0",
+    "pg": ">=8.0.0"
+  },
+  "peerDependenciesMeta": {
+    "pg": {
+      "optional": true
+    },
+    "mysql2": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/pg": "^8.11.0",
+    "@vitest/coverage-v8": "^2.1.9",
+    "mysql2": "^3.12.0",
+    "pg": "^8.13.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
